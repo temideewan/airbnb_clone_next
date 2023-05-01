@@ -14,6 +14,7 @@ export const Search = () => {
         hover:shadow-md
         transition
         cursor-pointer
+        hover:-translate-y-[1px]
     ">
       <div className="flex flex-row items-center justify-between">
         <div className="text-sm font-semibold px-6">
