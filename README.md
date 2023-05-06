@@ -9,3 +9,5 @@ Using ['Prisma'](https://www.prisma.io/) as the ORM layer over a ['MongoDB']('ht
 Form related actions are managed using ['react-hook-form'](https://react-hook-form.com/)
 
 Toast notifications handled using ['react-hot-toast'](https://react-hot-toast.com/)
+
+Authentication for social sign up using Google and github is handled using ['next-auth'](https://next-auth.js.org/)
