@@ -8,6 +8,7 @@ import { LoginModal } from './components/modals/LoginModal'
 import getCurrentUser from './actions/getCurrentUser'
 import { User } from '@prisma/client'
 import { SafeUser } from './types'
+import RentModal from './components/modals/RentModal'
 
 const font = Nunito({
   subsets: ["latin"]
@@ -33,6 +34,7 @@ export default async function RootLayout({
           <ToasterProvider />
           <RegisterModal />
           <LoginModal />  
+          <RentModal />
           <Navbar currentUser={safeUser} />
         </ClientOnly>
         {children}

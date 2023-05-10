@@ -58,6 +58,16 @@ export const LoginModal = () => {
     })
   }
 
+  const userSignIn = (mode: "github"| 'google') => {
+    signIn(mode).then((callback) => {
+      if (callback?.ok) {
+        toast.success("Logged in")
+        router.refresh();
+        loginModal.onClose()
+      }
+    })
+  }
+
   const toggle = useCallback(() => {
     loginModal.onClose();
     registerModal.onOpen();
@@ -92,13 +102,13 @@ export const LoginModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => signIn('google')}
+        onClick={() => userSignIn('google')}
       />
       <Button
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => signIn('github')}
+        onClick={() => userSignIn('github')}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row justify-center items-center gap-2">
