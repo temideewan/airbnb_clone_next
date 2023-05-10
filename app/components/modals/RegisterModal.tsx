@@ -9,6 +9,7 @@ import {
   useForm
 } from 'react-hook-form'
 import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 import { Modal } from "./Modal";
 import Heading from "../Heading";
 import { Input } from "../inputs/Input";
@@ -18,6 +19,7 @@ import { signIn } from "next-auth/react";
 
 export const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -26,7 +28,7 @@ export const RegisterModal = () => {
       errors
     }
   } = useForm<FieldValues>({
-    defaultValues: { 
+    defaultValues: {
       name: '',
       email: '',
       password: '',
@@ -45,10 +47,15 @@ export const RegisterModal = () => {
     });
   }
 
+  const toggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [loginModal, registerModal]);
+
   const bodyContent = (
     <form className="flex flex-col gap-4">
       <Heading title="Welcome to Airbnb" subtitle="Create an account" />
-      <Input 
+      <Input
         id="email"
         label="Email"
         disabled={isLoading}
@@ -56,7 +63,7 @@ export const RegisterModal = () => {
         errors={errors}
         required
       />
-      <Input 
+      <Input
         id="name"
         label="Name"
         disabled={isLoading}
@@ -64,7 +71,7 @@ export const RegisterModal = () => {
         errors={errors}
         required
       />
-      <Input 
+      <Input
         id="password"
         label="Password"
         type="password"
@@ -79,25 +86,25 @@ export const RegisterModal = () => {
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
       <hr />
-      <Button 
-      outline
-      label="Continue with Google"
-      icon={FcGoogle}
-      onClick={() => signIn('google')}
+      <Button
+        outline
+        label="Continue with Google"
+        icon={FcGoogle}
+        onClick={() => signIn('google')}
       />
-      <Button 
-      outline
-      label="Continue with Github"
-      icon={AiFillGithub}
-      onClick={() => signIn('github')}
+      <Button
+        outline
+        label="Continue with Github"
+        icon={AiFillGithub}
+        onClick={() => signIn('github')}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row justify-center items-center gap-2">
           <p className="">
-          Already have an account?
+            Already have an account?
           </p>
-          <p onClick={registerModal.onClose} className="text-neutral-800 cursor-pointer  ">
-          Log in
+          <p onClick={toggle} className="text-neutral-800 cursor-pointer hover:underline">
+            Log in
           </p>
         </div>
       </div>

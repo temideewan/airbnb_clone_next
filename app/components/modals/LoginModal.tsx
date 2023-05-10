@@ -21,7 +21,9 @@ import { useRouter } from "next/navigation";
 export const LoginModal = () => {
   const router = useRouter()
   const registerModal = useRegisterModal();
+
   const loginModal = useLoginModal();
+
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -30,7 +32,7 @@ export const LoginModal = () => {
       errors
     }
   } = useForm<FieldValues>({
-    defaultValues: { 
+    defaultValues: {
       email: '',
       password: '',
     }
@@ -44,22 +46,26 @@ export const LoginModal = () => {
     }).then((callback) => {
       setIsLoading(false);
 
-      if(callback?.ok){
+      if (callback?.ok) {
         toast.success("Logged in")
         router.refresh();
         loginModal.onClose()
       }
 
-      if(callback?.error){
+      if (callback?.error) {
         toast.error(callback.error);
       }
     })
   }
 
+  const toggle = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [loginModal, registerModal]);
   const bodyContent = (
     <form className="flex flex-col gap-4">
       <Heading title="Welcome back" subtitle="Login to your account" />
-      <Input 
+      <Input
         id="email"
         label="Email"
         disabled={isLoading}
@@ -67,7 +73,7 @@ export const LoginModal = () => {
         errors={errors}
         required
       />
-      <Input 
+      <Input
         id="password"
         label="Password"
         type="password"
@@ -82,25 +88,25 @@ export const LoginModal = () => {
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
       <hr />
-      <Button 
-      outline
-      label="Continue with Google"
-      icon={FcGoogle}
-      onClick={() => signIn('google')}
+      <Button
+        outline
+        label="Continue with Google"
+        icon={FcGoogle}
+        onClick={() => signIn('google')}
       />
-      <Button 
-      outline
-      label="Continue with Github"
-      icon={AiFillGithub}
-      onClick={() => signIn('github')}
+      <Button
+        outline
+        label="Continue with Github"
+        icon={AiFillGithub}
+        onClick={() => signIn('github')}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row justify-center items-center gap-2">
           <p className="">
-          Already have an account?
+            First time using Airbnb?
           </p>
-          <p onClick={registerModal.onClose} className="text-neutral-800 cursor-pointer  ">
-          Log in
+          <p onClick={toggle} className="text-neutral-800 cursor-pointer hover:underline ">
+            Create an account
           </p>
         </div>
       </div>
