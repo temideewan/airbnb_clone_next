@@ -27,6 +27,11 @@ const Map: React.FC<MapProps> = ({
     className="h-[35vh] rounded-lg"
     >
        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' />
+       {center && (
+        <Marker 
+        position={center as L.LatLngExpression}
+        />
+       )}
     </MapContainer>
    );
 }
