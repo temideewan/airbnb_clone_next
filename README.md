@@ -10,4 +10,15 @@ Form related actions are managed using ['react-hook-form'](https://react-hook-fo
 
 Toast notifications handled using ['react-hot-toast'](https://react-hot-toast.com/)
 
+styled using ['tailwind css'](https://tailwindcss.com/)
+
+state is managed using ['zustand'](https://www.npmjs.com/package/zustand)
+
 Authentication for social sign up using Google and github is handled using ['next-auth'](https://next-auth.js.org/)
+
+Country selection is managed using a combination of ['react-select'](https://react-select.com/home) and ['world-countries'](https://www.npmjs.com/package/world-countries)
+
+Map display is done using ['leaflet'](https://leafletjs.com/) and it's ['react implementation'](https://react-leaflet.js.org/).
+attribution to the ['OpenStreetMap contributors'](https://www.openstreetmap.org/copyright)
+
+
