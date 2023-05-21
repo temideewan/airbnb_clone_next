@@ -21,4 +21,4 @@ Country selection is managed using a combination of ['react-select'](https://rea
 Map display is done using ['leaflet'](https://leafletjs.com/) and it's ['react implementation'](https://react-leaflet.js.org/).
 attribution to the ['OpenStreetMap contributors'](https://www.openstreetmap.org/copyright)
 
-
+Image uploads is managed using ['cloudinary'](https://cloudinary.com/) with integration managed using the ['next-cloudinary'](https://next-cloudinary.spacejelly.dev/installation) package. 
