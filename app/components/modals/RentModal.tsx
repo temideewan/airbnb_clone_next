@@ -215,7 +215,7 @@ const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Now, set your proce"
+          title="Now, set your price"
           subtitle="How much will you charge per night"
         />
 
