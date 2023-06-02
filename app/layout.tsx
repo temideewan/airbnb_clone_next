@@ -25,8 +25,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const currentUser: User | null = await getCurrentUser();
-   const safeUser = currentUser && { ...currentUser, createdAt: currentUser?.createdAt.toISOString(), updatedAt: currentUser?.updatedAt.toISOString(), emailVerified: currentUser?.emailVerified?.toISOString() || null } as SafeUser;
+  const currentUser: SafeUser | null = await getCurrentUser();
   return (
     <html lang="en">
       <body className={font.className}>
@@ -35,7 +34,7 @@ export default async function RootLayout({
           <RegisterModal />
           <LoginModal />  
           <RentModal />
-          <Navbar currentUser={safeUser} />
+          <Navbar currentUser={currentUser} />
         </ClientOnly>
         <div className="pb-20 pt-28">
         {children}
