@@ -1,4 +1,6 @@
+"use client";
 import Container from "@/app/components/Container";
+import ListingHead from "@/app/components/listings/ListingHead";
 import { categories } from "@/app/components/navbar/Categories";
 import { SafeListing, SafeUser } from "@/app/types";
 import { Reservation } from "@prisma/client";
@@ -7,7 +9,7 @@ import { useMemo } from "react";
 interface ListingClientProps {
   reservations?: Reservation[];
   listing: SafeListing & { user: SafeUser};
-  currentUser?: SafeUser | null
+  currentUser: SafeUser | null
 }
 const ListingClient: React.FC<ListingClientProps> = ({
   listing,
@@ -26,7 +28,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
           imageSrc={listing.imageSrc}
           locationValue={listing.locationValue}
           id={listing.id}
-          currentUser={currentUser}
+          currentUser={currentUser} 
           />
         </div>
       </div>
