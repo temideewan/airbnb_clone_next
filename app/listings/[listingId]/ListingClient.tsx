@@ -12,6 +12,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import ListingReservation from "@/app/components/listings/ListingReservation";
+import { Range } from "react-date-range";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -43,7 +44,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
 
   const [isLoading, setIsLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(listing.price);
-  const [dateRange, setDateRange] = useState(initialDateRange);
+  const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
   const onCreateReservation = useCallback(() => {
     if (!currentUser) {
@@ -70,16 +71,17 @@ const ListingClient: React.FC<ListingClientProps> = ({
     })
   }, [currentUser, dateRange, listing?.id, loginModal, router, totalPrice])
 
-  useEffect(() => {
-    if (dateRange.startDate && dateRange.endDate) {
-      const dayCount = differenceInCalendarDays(dateRange.endDate, dateRange.startDate)
+  const handleDateChange = useCallback((value: Range) => {
+    if(value.endDate && value.startDate && value.key){
+      setDateRange(value);
+      const dayCount = differenceInCalendarDays(value.endDate, value.startDate)
       if (dayCount && listing.price) {
         setTotalPrice(dayCount * listing.price)
       } else {
         setTotalPrice(listing.price)
       }
     }
-  }, [dateRange, listing.price,])
+  }, [listing.price])
 
   const category = useMemo(() => {
     return categories.find((category) => category.label === listing.category);
@@ -109,7 +111,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
             <ListingReservation 
             price={listing.price}
             totalPrice={totalPrice}
-            onChangeDate={(value) => setDateRange(value)}
+            onChangeDate={handleDateChange}
             dateRange={dateRange}
             onSubmit={onCreateReservation}
             disabled={isLoading}

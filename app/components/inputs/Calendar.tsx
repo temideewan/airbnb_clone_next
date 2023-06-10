@@ -25,7 +25,10 @@ const Calendar: React.FC<CalendarProps> = ({
       minDate={new Date()}
       disabledDates={disabledDates}
       editableDateInputs={true}
-      onChange={onChange}
+      onChange={(value)=> {
+        console.log(value);
+        onChange(value)
+      }}
     />
   );
 }
