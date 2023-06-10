@@ -5,6 +5,7 @@ import { SafeUser } from "@/app/types";
 import Heading from "../Heading";
 import Image from "next/image";
 import { HeartButton } from "../HeartButton";
+import useFavorite from "@/app/hooks/useFavourites";
 
 interface ListingHeadProps {
   title: string;
@@ -22,6 +23,7 @@ const ListingHead: React.FC<ListingHeadProps> = ({
 }) => {
   const { getByValue} = useCountries();
   const location = getByValue(locationValue);
+  const { toggleFavorite} = useFavorite({ listingId: id , currentUser });
   return ( 
     <>
       <Heading 
@@ -34,6 +36,7 @@ const ListingHead: React.FC<ListingHeadProps> = ({
       src={imageSrc}
       fill
       className="object-cover w-full"
+      onDoubleClick={toggleFavorite}
       />
       <div className="absolute top-5 right-5">
         <HeartButton 
