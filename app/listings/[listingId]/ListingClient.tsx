@@ -63,7 +63,8 @@ const ListingClient: React.FC<ListingClientProps> = ({
 
       // redirect to /trips
       router.refresh();
-    }).catch(() => {
+    }).catch((e) => {
+      console.log(e);
       toast.error("Something went wrong")
     }).finally(() => {
       setIsLoading(false);
@@ -72,7 +73,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
   }, [currentUser, dateRange, listing?.id, loginModal, router, totalPrice])
 
   const handleDateChange = useCallback((value: Range) => {
-    if(value.endDate && value.startDate && value.key){
+    if (value.endDate && value.startDate && value.key) {
       setDateRange(value);
       const dayCount = differenceInCalendarDays(value.endDate, value.startDate)
       if (dayCount && listing.price) {
@@ -107,17 +108,17 @@ const ListingClient: React.FC<ListingClientProps> = ({
               bathroomCount={listing.bathroomCount}
               locationValue={listing.locationValue}
             />
-          <div className="order-first mb-10 md:order-last md:col-span-3">
-            <ListingReservation 
-            price={listing.price}
-            totalPrice={totalPrice}
-            onChangeDate={handleDateChange}
-            dateRange={dateRange}
-            onSubmit={onCreateReservation}
-            disabled={isLoading}
-            disabledDates={disabledDates}
-            />
-          </div>
+            <div className="order-first mb-10 md:order-last md:col-span-3">
+              <ListingReservation
+                price={listing.price}
+                totalPrice={totalPrice}
+                onChangeDate={handleDateChange}
+                dateRange={dateRange}
+                onSubmit={onCreateReservation}
+                disabled={isLoading}
+                disabledDates={disabledDates}
+              />
+            </div>
           </div>
         </div>
       </div>
