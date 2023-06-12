@@ -22,3 +22,7 @@ Map display is done using ['leaflet'](https://leafletjs.com/) and it's ['react i
 attribution to the ['OpenStreetMap contributors'](https://www.openstreetmap.org/copyright)
 
 Image uploads is managed using ['cloudinary'](https://cloudinary.com/) with integration managed using the ['next-cloudinary'](https://next-cloudinary.spacejelly.dev/installation) package. 
+
+Date display and range selection is handled using ['react-date-range'](https://www.npmjs.com/package/react-date-range)
+
+Beautiful icons from ['react-icons'](https://www.npmjs.com/package/react-icons)
