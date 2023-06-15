@@ -8,7 +8,7 @@ import ListingCard from "./components/listings/ListingCard";
 interface HomeProps {
   searchParams: IListingParams;
 }
-const Home = async ({ searchParams}: HomeProps) => {
+const Home = async ({ searchParams }: HomeProps) => {
   const currentUser = await getCurrentUser();
   const listings = await getListings(searchParams);
   const isEmpty = listings.length === 0;
