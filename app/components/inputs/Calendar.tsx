@@ -26,7 +26,6 @@ const Calendar: React.FC<CalendarProps> = ({
       disabledDates={disabledDates}
       editableDateInputs={true}
       onChange={(value)=> {
-        console.log(value);
         onChange(value)
       }}
     />
