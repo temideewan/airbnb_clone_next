@@ -17,14 +17,16 @@ import { toast } from "react-hot-toast";
 import { Button } from "../Button";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
+import useGoogleGithub, { googleOrGithub } from "@/app/hooks/usegooglegithubLoader";
+
 
 export const LoginModal = () => {
   const router = useRouter()
   const registerModal = useRegisterModal();
 
   const loginModal = useLoginModal();
-
   const [isLoading, setIsLoading] = useState(false);
+  const { isLoadingGithub, isLoadingGoogle, setLoadingGoogleOrGithub } = useGoogleGithub();
   const {
     register,
     handleSubmit,
@@ -58,13 +60,16 @@ export const LoginModal = () => {
     })
   }
 
-  const userSignIn = (mode: "github"| 'google') => {
+  const userSignIn = (mode: "github" | 'google') => {
+    setLoadingGoogleOrGithub(mode);
     signIn(mode).then((callback) => {
       if (callback?.ok) {
         toast.success("Logged in")
         router.refresh();
         loginModal.onClose()
       }
+    }).finally(() => {
+      setLoadingGoogleOrGithub(null);
     })
   }
 
@@ -102,12 +107,14 @@ export const LoginModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
+        isLoading={isLoadingGoogle}
         onClick={() => userSignIn('google')}
       />
       <Button
         outline
         label="Continue with Github"
         icon={AiFillGithub}
+        isLoading={isLoadingGithub}
         onClick={() => userSignIn('github')}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
@@ -132,6 +139,7 @@ export const LoginModal = () => {
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footerContent}
+      isCompletingAction={isLoading}
     />
   )
 }

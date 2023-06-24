@@ -1,5 +1,6 @@
 "use client";
 import { IconType } from "react-icons";
+import PuffLoader from "react-spinners/PuffLoader";
 
 interface ButtonProps {
   label: String;
@@ -7,7 +8,8 @@ interface ButtonProps {
   disabled?: boolean;
   outline?: Boolean;
   small?: boolean;
-  icon?: IconType
+  icon?: IconType;
+  isLoading?: boolean;
 
 }
 export const Button: React.FC<ButtonProps> = ({
@@ -17,6 +19,7 @@ export const Button: React.FC<ButtonProps> = ({
   outline,
   small,
   icon: Icon,
+  isLoading = false,
 }) => {
   return (
     <button onClick={onClick} disabled={disabled} className={`
@@ -27,6 +30,9 @@ export const Button: React.FC<ButtonProps> = ({
       hover:opacity-80
       transition
       w-full
+      flex
+      items-center
+      justify-center
       ${outline ? 'bg-white' : 'bg-rose-500'}
       ${outline ? 'border-black' : 'bg-rose-500'}
       ${outline ? 'text-black' : 'text-white'}
@@ -41,7 +47,7 @@ export const Button: React.FC<ButtonProps> = ({
           className="absolute left-4 top-3"
         />
       )}
-      {label}
+      {isLoading? <PuffLoader size={24} color={outline? '#f43f5e': "white"} />:label}
     </button>
   )
 }

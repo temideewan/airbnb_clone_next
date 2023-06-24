@@ -16,11 +16,13 @@ import { Input } from "../inputs/Input";
 import { toast } from "react-hot-toast";
 import { Button } from "../Button";
 import { signIn } from "next-auth/react";
+import useGoogleGithub from "@/app/hooks/usegooglegithubLoader";
 
 export const RegisterModal = () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
+  const { isLoadingGithub, isLoadingGoogle, setLoadingGoogleOrGithub } = useGoogleGithub();
   const {
     register,
     handleSubmit,
@@ -91,11 +93,13 @@ export const RegisterModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
+        isLoading={isLoadingGoogle}
         onClick={() => signIn('google')}
       />
       <Button
         outline
         label="Continue with Github"
+        isLoading={isLoadingGithub}
         icon={AiFillGithub}
         onClick={() => signIn('github')}
       />

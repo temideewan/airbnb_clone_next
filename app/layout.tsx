@@ -6,7 +6,6 @@ import { Nunito } from "next/font/google"
 import ToasterProvider from './providers/ToasterProvider'
 import { LoginModal } from './components/modals/LoginModal'
 import getCurrentUser from './actions/getCurrentUser'
-import { User } from '@prisma/client'
 import { SafeUser } from './types'
 import RentModal from './components/modals/RentModal'
 import SearchModal from './components/modals/SearchModal'

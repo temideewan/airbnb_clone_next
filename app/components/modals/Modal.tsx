@@ -13,6 +13,7 @@ interface ModalProps {
   disabled?: boolean;
   secondaryAction?: () => void;
   secondaryActionLabel?: string;
+  isCompletingAction?: boolean;
 }
 export const Modal: React.FC<ModalProps> = ({
   isOpen,
@@ -25,6 +26,7 @@ export const Modal: React.FC<ModalProps> = ({
   disabled,
   secondaryAction,
   secondaryActionLabel,
+  isCompletingAction
 }) => {
   const [showModal, setShowModal] = useState(isOpen)
 
@@ -103,7 +105,8 @@ export const Modal: React.FC<ModalProps> = ({
                   <Button
                     disabled={disabled}
                     label={actionLabel}
-                    onClick={handleSubmit} />
+                    onClick={handleSubmit}
+                    isLoading={isCompletingAction} />
                 </div>
                 {footer}
               </div>
